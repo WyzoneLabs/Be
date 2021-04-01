@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".SignUpActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:id="@+id/phone_parent"
+        android:visibility="visible"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline6"
+        app:layout_constraintStart_toEndOf="@id/guideline5"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/ac_sign_up_welcome_logo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/what_phone"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ac_sign_up_phone_edit_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ac_sign_up_phone_sms_info">
+
+            <LinearLayout
+                android:id="@+id/ac_sign_up_phone_editor_box"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:visibility="visible"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ac_sign_up_phone_country_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center_vertical"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_contentColor="@android:color/black"
+                    app:ccp_defaultLanguage="ENGLISH"
+                    app:ccp_showArrow="false"
+                    app:ccp_showFlag="true"
+                    app:ccp_showNameCode="false"
+                    app:ccp_textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/ac_sign_up_phone_edit_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:focusedByDefault="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/phone_number"
+                    android:inputType="phone"
+                    android:maxLength="16"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    app:backgroundTint="@android:color/transparent"
+                    tools:targetApi="o" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/ac_sign_up_code_phone_sep"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginBottom="6dp"
+                android:background="@color/colorAccent"
+                app:layout_constraintStart_toStartOf="@id/ac_sign_up_phone_editor_box"
+                app:layout_constraintTop_toBottomOf="@id/ac_sign_up_phone_editor_box"
+                app:layout_constraintEnd_toEndOf="@id/ac_sign_up_phone_editor_box"/>
+
+            <TextView
+                android:id="@+id/ac_sign_up_phone_err_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/invalid_phone"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/ac_sign_up_phone_editor_box"
+                app:layout_constraintStart_toStartOf="@id/ac_sign_up_phone_editor_box"
+                app:layout_constraintTop_toBottomOf="@+id/ac_sign_up_code_phone_sep" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/ac_sign_up_phone_sms_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/phone_verification_sms"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ac_sign_up_welcome_logo" />
+
+        <TextView
+            android:id="@+id/ac_sign_up_next_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_marginTop="24dp"
+            android:text="@string/next"
+            android:layout_marginBottom="32dp"
+            style="@style/Theme.Be.Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ac_sign_up_phone_edit_box" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ac_sign_up_code_verify_box"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toTopOf="@id/ac_sign_up_terms_box"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toEndOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_verification_code"
+            android:id="@+id/ac_sign_up_verify_title_txt"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ac_sign_up_verify_title_info_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/enter_verification_code_info"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ac_sign_up_verify_title_txt" />
+
+        <ui.pinview.PinView
+            android:id="@+id/ac_sign_up_code_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:pinHeight="32dp"
+            app:pinWidth="32dp"
+            app:pinLength="6"
+            app:cursorVisible="false"
+            app:forceKeyboard="true"
+            app:hint="0"
+            app:inputType="number"
+            app:password="false"
+            app:textSize="14sp"
+            app:splitWidth="4dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ac_sign_up_verify_title_info_txt"/>
+
+        <EditText
+            android:id="@+id/ac_sign_up_p_v_code_edit_txt"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_marginTop="24dp"
+            android:hint="@string/verification_code"
+            android:inputType="number"
+            app:backgroundTint="@color/colorGreen"
+            android:maxLength="6"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:visibility="gone"
+            android:paddingBottom="8dp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textAlignment="gravity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ac_sign_up_verify_title_info_txt" />
+
+        <TextView
+            android:id="@+id/ac_sign_up_p_v_request_new_code_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/request_new_code"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ac_sign_up_code_view" />
+
+        <TextView
+            android:id="@+id/ac_sign_up_verify_next_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_marginTop="24dp"
+            android:text="@string/next"
+            android:layout_marginBottom="32dp"
+            style="@style/Theme.Be.ButtonSolid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ac_sign_up_p_v_request_new_code_link" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ac_sign_up_terms_box"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ac_sign_up_terms_info"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            android:text="@string/sign_up_terms_agree_info"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ac_sign_up_privacy"
+            android:textColor="@color/colorAccent"
+            android:layout_marginEnd="2dp"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:text="@string/privacy"
+            app:layout_constraintTop_toTopOf="@id/ac_sign_up_or"
+            app:layout_constraintEnd_toStartOf="@id/ac_sign_up_or"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ac_sign_up_or"
+            android:textAlignment="center"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            android:text="&amp;"
+            app:layout_constraintTop_toBottomOf="@id/ac_sign_up_terms_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ac_sign_up_term"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:text="@string/chat_terms_of_service"
+            app:layout_constraintTop_toTopOf="@id/ac_sign_up_or"
+            app:layout_constraintStart_toEndOf="@id/ac_sign_up_or"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

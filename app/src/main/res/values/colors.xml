@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#0A1229</color>
+    <color name="colorAccent">#00A2ED</color>
+    <color name="colorAccentTranslucent">#8000A2ED</color>
+
+    <color name="colorGreen">#228B22</color>
+    <color name="colorGray">#B2B2B2</color>
+    <color name="colorLightGray">#F1F1F1</color>
+    <color name="colorBackground">#FCFCFC</color>
+
+    <color name="colorDarkGray">#2E2E2E</color>
+    <color name="colorDimGray">#FF697781</color>
+    <color name="colorDimGrayTranslucent">#51D1D8DE</color>
+    <color name="colorCream">#5a9ca0a6</color>
+
+    <color name="brimbay_progress_default_color">#b1000000</color>
+    <color name="brimbay_progress_grey_color">#449E9E9E</color>
+
+    <color name="colorDialogBackground">#E4E4E4</color>
+
+    <color name="colorDark">#232D35</color>
+
+    <color name="colorTextPrimary">#252525</color>
+
+    <color name="colorLight">#F8FAFB</color>
+    <color name="colorLightDark">#ECEFEE</color>
+
+    <color name="colorPink">#FD2636</color>
+    <color name="colorOrange">#ffff8800</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorBackgroundLight">#F4F4F4</color>
+    <color name="colorWhiteTranslucent">#34697781</color>
+    <color name="colorGreenTranslucent">#2202F4A9</color>
+
+    <color name="material_dialog_background">@android:color/transparent</color>
+
+    <color name="material_dialog_title_text_color">@color/colorPrimaryDark</color>
+    <color name="material_dialog_message_text_color">@color/colorDark</color>
+
+    <color name="material_dialog_positive_button_text_color">@color/colorPrimary</color>
+    <color name="material_dialog_negative_button_text_color">@color/colorAccent</color>
+
+    <color name="material_dialog_positive_button_color">@color/colorAccent</color>
+</resources>

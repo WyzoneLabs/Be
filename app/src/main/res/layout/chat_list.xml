@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cfl_parent"
+    android:layout_marginHorizontal="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/cfl_sep"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
+        android:alpha="0.6"
+        android:background="@color/colorLightDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cfl_avata"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/default_user_avata"
+        android:layout_height="@dimen/default_user_avata"
+        android:id="@+id/cfl_avata"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/colorAccent"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/user_100px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cfl_sep"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/cl_online_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/dot_online"
+        app:layout_constraintTop_toTopOf="@id/cfl_avata"
+        app:layout_constraintStart_toStartOf="@id/cfl_avata" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/small_emoji_status_size"
+        android:layout_height="@dimen/small_emoji_status_size"
+        app:cardCornerRadius="10dp"
+        app:contentPadding="2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardElevation="2dp"
+        android:id="@+id/fv_emoji_status_img_box"
+        app:cardUseCompatPadding="false"
+        app:cardBackgroundColor="@color/colorLight"
+        app:layout_constraintEnd_toEndOf="@id/cfl_avata"
+        app:layout_constraintBottom_toBottomOf="@id/cfl_avata">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fv_emoji_status_img"
+            android:layout_gravity="center"
+            android:contentDescription="@string/emoji_status"
+            android:src="@drawable/status_emoji_violin_100px"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/cfl_user_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/cfl_time"
+        app:layout_constraintStart_toStartOf="@id/cfl_sep"
+        app:layout_constraintTop_toTopOf="@id/cfl_avata"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/cfl_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/colorGray"
+        android:textSize="13sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/cfl_user_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@tools:sample/date/hhmm" />
+
+    <TextView
+        android:id="@+id/cfl_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
+        android:drawablePadding="4dp"
+        app:layout_constraintEnd_toEndOf="@id/cfl_time"
+        app:layout_constraintStart_toStartOf="@id/cfl_user_name"
+        app:layout_constraintTop_toBottomOf="@id/cfl_user_name"
+        tools:text="@tools:sample/lorem" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

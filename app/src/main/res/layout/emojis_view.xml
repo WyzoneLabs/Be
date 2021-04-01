@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/emoji_background">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:contentDescription="@string/emoji_status"
+        android:id="@+id/ev_emoji"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:src="@drawable/emoji_one_1f3c7_1f3fb"/>
+
+</FrameLayout>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardUseCompatPadding="false"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="40dp"
+                android:layout_height="3dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="1.5dp"
+                android:layout_marginTop="2dp"
+                app:cardPreventCornerOverlap="true"
+                android:id="@+id/fb_sep"
+                app:cardBackgroundColor="@color/colorLightDark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fb_info"
+                android:textSize="24sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:text="@string/send_chat_request"
+                app:layout_constraintTop_toBottomOf="@id/fb_sep"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/large_avata_size"
+                android:layout_height="@dimen/large_avata_size"
+                android:id="@+id/fb_avata"
+                app:civ_border_color="@color/colorAccent"
+                app:civ_border_width="2dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/user_100px"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fb_info"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@tools:sample/avatars"/>
+
+
+            <ImageView
+                android:id="@+id/fb_online_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:src="@drawable/big_dot_online"
+                app:layout_constraintTop_toTopOf="@id/fb_avata"
+                app:layout_constraintStart_toStartOf="@id/fb_avata" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/large_emoji_status_size"
+                android:layout_height="@dimen/large_emoji_status_size"
+                app:cardCornerRadius="24dp"
+                app:contentPadding="8dp"
+                android:id="@+id/fb_emoji_status_img_box"
+                app:cardPreventCornerOverlap="true"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="false"
+                app:cardBackgroundColor="@color/colorLight"
+                app:layout_constraintEnd_toEndOf="@id/fb_avata"
+                app:layout_constraintBottom_toBottomOf="@id/fb_avata">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fb_emoji_status_img"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/emoji_status"
+                    android:src="@drawable/status_emoji_thinking_face_100px"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fb_name"
+                android:textSize="17sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/colorDark"
+                tools:text="@tools:sample/full_names"
+                app:layout_constraintTop_toBottomOf="@id/fb_avata"
+                app:layout_constraintStart_toStartOf="@id/fb_avata"
+                app:layout_constraintEnd_toEndOf="@id/fb_avata"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fb_phone"
+                android:textSize="14sp"
+                android:textColor="@color/colorAccent"
+                tools:text="@tools:sample/us_phones"
+                app:layout_constraintTop_toBottomOf="@id/fb_name"
+                app:layout_constraintStart_toStartOf="@id/fb_avata"
+                app:layout_constraintEnd_toEndOf="@id/fb_avata"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="@string/cancel"
+                android:id="@+id/fb_cancel"
+                android:textColor="@color/colorDark"
+                android:paddingHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/colorDark"
+                android:background="@drawable/default_button_background"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@id/fb_phone"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="@string/send"
+                android:textColor="@color/white"
+                android:id="@+id/fb_confirm"
+                android:paddingHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/colorDark"
+                android:background="@drawable/default_button_background_solid"
+                app:layout_constraintTop_toBottomOf="@id/fb_phone"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

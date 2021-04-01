@@ -1,0 +1,213 @@
+<resources>
+    <string name="app_name">Dialogs</string>
+
+    <string name="app_name_small">dialogs</string>
+    <string name="for_app_name">Dialogs\'</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="recent_chats">Recent Chats</string>
+    <string name="say_hi_to">Say Hi to</string>
+    <string name="type_message">Type message</string>
+
+
+    <string name="title_home">Chats</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="allow_app_permissions_snack_bar">Please allow %s permission to continue</string>
+    <string name="dialog_ok">Ok</string>
+
+
+    <string name="account_primary_phone">Primary phone number</string>
+    <string name="enter_verification_code">Verify your phone number</string>
+
+
+    <string name="enter_verification_code_info">Now, enter the 6-digit code sent to\n%s.</string>
+
+    <string name="verification_code">Verification code</string>
+
+    <string name="request_new_code">Request new code?</string>
+
+
+    <string name="sign_up_error_invalid_num">Error, invalid number!</string>
+    <string name="sign_up_error_verify_failed">Error, verification failed. Please try again later!</string>
+    <string name="sign_up_code_sent">Verification code sent</string>
+    <string name="sign_up_state_success">Congratulations you\'ve successfully logged in!</string>
+
+    <string name="sign_up_error_invalid_code">Error, invalid code!</string>
+
+    <string name="sign_up_error_failed">Sorry error occurred while logging you in, please try again later</string>
+    <string name="instant_validation">000000</string>
+    <string name="sign_up_empty_code_field">Verification code cannot be empty!</string>
+    <string name="skip">Skip</string>
+    <string name="phone">Phone</string>
+    <string name="invalid_phone">Invalid phone number</string>
+    <string name="phone_verification_sms">We shall send a code to this number to verify that it is valid</string>
+    <string name="username">Username</string>
+    <string name="complete">Complete</string>
+    <string name="avata_added">Your Profile Photo Added</string>
+    <string name="change_avata">Change Profile Photo</string>
+    <string name="upload_avata_info">Please note your profile photo will be visible to all your friends, and you can change it anytime.</string>
+    <string name="logout">Sign out</string>
+    <string name="confirm_sign_out">Are you sure you want to sign out from your account?</string>
+    <string name="manage_avata">Manage Profile Photo</string>
+    <string name="gender">Gender</string>
+    <string name="location">Location</string>
+    <string name="age_set">Age Set</string>
+
+
+    <string name="pref_info_ringtone">Play sound when you receive a new notification</string>
+    <string name="pref_info_in_app_sounds">Play sound when you receive a new message while chatting</string>
+    <string name="pref_info_vibrate">Vibrate when a new notification is received</string>
+    <string name="pref_title_enter_send">Enter Key Send</string>
+    <string name="pref_info_enter_key">Send messages when you hit enter in the keyboard</string>
+    <string name="pref_title_background">Use Chat Video Background</string>
+    <string name="pref_info_background">A video will be used as a default chat window background</string>
+
+    <string name="bio_hint">Bio</string>
+    <string name="default_avata">Default Profile Photo</string>
+    <string name="create_username">Add Your Details</string>
+    <string name="add_username">Add username of your choice, you can change this anytime.</string>
+    <string name="sign_up_terms">By signing up, you are agreeing to our</string>
+    <string name="terms_n_privacy"><![CDATA[Terms & Privacy Policy]]></string>
+    <string name="choose_your_avata">Choose Your Profile Photo</string>
+    <string name="add_profile_photo">Add a picture that your friends will identify you with.</string>
+    <string name="choose_avata">Choose An Profile Photo</string>
+    <string name="send">Send</string>
+    <string name="accept">Accept</string>
+    <string name="app_slogan">Dialogs for human beings</string>
+    <string name="permission_granted">%s permission granted</string>
+    <string name="permissions_denied">%s permission denied</string>
+    <string name="friends_online">Friends</string>
+    <string name="account_settings">Account &amp; Settings</string>
+    <string name="your_account">Account Settings</string>
+    <string name="chat_notifications">Notifications</string>
+    <string name="chat_settings">Chat Settings</string>
+    <string name="privacy">Privacy policy</string>
+    <string name="default_bio">%s is awesome</string>
+    <string name="default_username">%suser</string>
+    <string name="log_out">Log out</string>
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pref_notification_in_app_sounds">In-chat sounds</string>
+    <string name="chat_request_title">%s chat requests</string>
+    <string name="reject">Reject</string>
+    <string name="new_chat_request">You have a new chat request</string>
+    <string name="live_chat_request">%s wants to video chat with you</string>
+    <string name="agora_app_id">fb8a0e2ee77a45cd9617965676598fdc</string>
+    <string name="no_friends">No friends found</string>
+    <string name="title_activity_service">ServiceActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chat_terms_of_service">Terms of service</string>
+    <string name="sign_up_terms_agree_info">By signing up, you are agreeing to our</string>
+    <string name="invite_with">Invite with</string>
+    <string name="title_activity_call_to_actions">Call to action</string>
+    <string name="title_account">My Account</string>
+    <string name="default_text">default</string>
+    <string name="chat_notifications_info">Change the way you want to receive your notifications</string>
+    <string name="chat_settings_info">Set up your chat windows and how you chat with your friends.</string>
+    <string name="send_chat_request">Send chat request</string>
+    <string name="send_chat_request_title">Send Chat Request?</string>
+    <string name="search_friends_hint">Search friends</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_info">Your notifications will appear here.</string>
+    <string name="about_us">About Us</string>
+    <string name="profile">Profile</string>
+    <string name="rewards">Rewards</string>
+    <string name="rewards_info">You earn points by using the app. Check your accumulated rewards &amp; redeem.</string>
+    <string name="by">By</string>
+    <string name="wyzone">Wyzone</string>
+    <string name="labs">Labs</string>
+    <string name="what_phone">What\'s your phone number?</string>
+    <string name="phone_number">Phone number</string>
+    <string name="get_started">Get Started</string>
+    <string name="secure_immerse_dialogs"><![CDATA[Secure & Immersive Dialogs]]></string>
+    <string name="secure_immersive_fun">Secure&#183;Immersive&#183;Fun</string>
+    <string name="personalize_account">Personalize Your Account</string>
+    <string name="personalize_account_info">We need this content to customize the content we serve to you</string>
+    <string name="select_gender">Select gender</string>
+    <string name="select_ageset">Select age-set</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="rewards_information">You earn points by using the app</string>
+    <string name="redeem">Redeem Your Points</string>
+    <string name="app_preferences">App Preferences</string>
+    <string name="preferences_information">Customize the app\'s  preferences</string>
+    <string name="update">Update</string>
+    <string name="new_s">New</string>
+    <string name="pref_main_preference">pref_main_shared_key</string>
+    <string name="sign_in">Sign In</string>
+    <string name="chat_request_confirm">Please confirm you want to send chat request to %s</string>
+    <string name="cancel">Cancel</string>
+    <string name="send_request">Send Request</string>
+    <string name="chat_request_send_success">Chat request successfully sent</string>
+    <string name="chat_request_already_sent">Chat request already sent</string>
+    <string name="chat_request_status">Chat Request Status</string>
+    <string name="search">Search</string>
+    <string name="select_location">Select location</string>
+    <string name="searching_friends">Searching friends</string>
+    <string name="title_activity_profile">Profile &amp; Settings</string>
+    <string name="notifications_settings">Notification Settings</string>
+    <string name="redeem_soon">This feature is not available right now, please try again soon.</string>
+    <string name="you">You</string>
+    <string name="no_messages_yet">No Messages Yet</string>
+    <string name="invite_friends_to">Invite friends to %s</string>
+    <string name="search_friends_msg_hint">Search friends or messages</string>
+    <string name="version">Version %s</string>
+    <string name="chat_security_message">Your chat messages with %s are private and are protected by %s end-to-end encryption.</string>
+    <string name="data_privacy">Data Privacy</string>
+    <string name="learn_more">Learn more.</string>
+    <string name="title_activity_search_location">Search</string>
+    <string name="friends">Friends</string>
+    <string name="recent_friends">Recent Friends</string>
+    <string name="see_all">See All</string>
+    <string name="chats">Chats</string>
+    <string name="title_activity_friends">Friends</string>
+    <string name="your_contacts">Your Contacts</string>
+    <string name="search_name_phone_hint">Name or Phone</string>
+    <string name="emoji_status">Emoji status</string>
+    <string name="invite_friends">Invite friends</string>
+    <string name="your_friends">Your Friends</string>
+    <string name="title_activity_status">StatusActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="done">Done</string>
+    <string name="change_emoji_status">Change Emoji Status</string>
+    <string name="express_yourself_with_emoji">Express yourself with emoji</string>
+    <string name="back">back</string>
+    <string name="view_profile_photo">View Profile Photo</string>
+    <string name="delete_profile_photo">Delete Profile Photo</string>
+    <string name="change_profile_photo">Change Profile Photo</string>
+    <string name="confirm_logout">Are you sure you want to sign out?</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="confirm">Confirm</string>
+    <string name="ok">OK</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="status_verification_failed">Verification failed, request for a new code</string>
+    <string name="status_sign_in_failed">Sign in failed, please try again</string>
+    <string name="din_t_receive_code">Didn\'t receive code?</string>
+    <string name="remaining_time">Please wait <a>%ds</a></string>
+    <string name="recent_activities">Recent Activities</string>
+    <string name="no_recent_activities">No recent activities</string>
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@android:color/transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <xyz.schwaab.avvylib.AvatarView
+        android:layout_width="@dimen/medium_user_avata"
+        android:layout_height="@dimen/medium_user_avata"
+        android:id="@+id/fv_avata"
+        android:src="@drawable/user_100px"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/fv_initial"
+        style="@style/Theme.Be.DefaultAvata"
+        android:layout_width="@dimen/medium_user_avata"
+        android:layout_height="@dimen/medium_user_avata"
+        android:text="T"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/fv_online_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:visibility="gone"
+        android:src="@drawable/dot_online"
+        app:layout_constraintTop_toTopOf="@id/fv_avata"
+        app:layout_constraintStart_toStartOf="@id/fv_avata" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/medium_emoji_status_size"
+        android:layout_height="@dimen/medium_emoji_status_size"
+        app:cardCornerRadius="14dp"
+        app:contentPadding="2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardElevation="2dp"
+        android:id="@+id/fv_emoji_status_img_box"
+        app:cardUseCompatPadding="false"
+        app:cardBackgroundColor="@color/colorLight"
+        app:layout_constraintEnd_toEndOf="@id/fv_avata"
+        app:layout_constraintBottom_toBottomOf="@id/fv_avata">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fv_emoji_status_img"
+            android:layout_gravity="center"
+            android:contentDescription="@string/emoji_status"
+            android:src="@drawable/status_emoji_violin_100px"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/full_names"
+        android:gravity="center"
+        android:singleLine="true"
+        android:id="@+id/fv_user_name"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/fv_avata"
+        app:layout_constraintEnd_toEndOf="@id/fv_avata"
+        app:layout_constraintTop_toBottomOf="@id/fv_avata"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

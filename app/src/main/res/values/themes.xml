@@ -1,0 +1,125 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Be" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/colorPrimary</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Be.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/raleway_medium</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="SheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <!--<item name="android:windowCloseOnTouchOutside">false</item>-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="Theme.Be.Button" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/default_button_background</item>
+    </style>
+
+    <style name="Theme.Be.ButtonSolid" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/default_button_background_solid</item>
+    </style>
+
+    <style name="Theme.Be.DefaultAvata">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">@drawable/default_avata</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Theme for Dialog Title -->
+    <style name="Theme.Be.MaterialDialogTitle">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
+
+    <!-- Theme for Dialog Message -->
+    <style name="Theme.Be.MaterialDialogMessage">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <!-- Theme for Dialog Positive Button -->
+    <style name="MaterialDialog.PositiveButton" parent="Theme.MaterialComponents.Light.Bridge">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">0.025</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <!-- Theme for Dialog Negative Button -->
+    <style name="MaterialDialog.NegativeButton" parent="Theme.MaterialComponents.Light.Bridge">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">0.025</item>
+        <item name="android:textAllCaps">false</item>
+
+    </style>
+
+    <!-- Theme for BottomSheetDialog -->
+    <style name="Theme.Be.BottomSheet" parent="Theme.MaterialComponents">
+        <item name="android:background">@drawable/bottomsheet_back</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="Theme.Be.BaseBottomSheetDialog" parent="Theme.MaterialComponents">
+        <item name="android:windowIsFloating">true</item>
+        <item name="bottomSheetStyle">@style/Theme.Be.BottomSheet</item>
+    </style>
+
+    <style name="Theme.Be.BottomSheetDialogTheme" parent="Theme.Be.BaseBottomSheetDialog">
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.1</item>
+        <!--        <item name="android:background">@color/colorWhiteTranslucent</item>-->
+    </style>
+
+    <style name="Theme.Be.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.Be.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Be.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

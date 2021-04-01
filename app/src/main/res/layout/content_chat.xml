@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_chat"
+    tools:context=".ChatActivity">
+
+    <FrameLayout
+        android:id="@+id/vm_guest_video_box"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vm_top_box"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/white"
+        android:layout_alignParentTop="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/vm_guest_avata"
+            android:layout_width="@dimen/chat_friend_avata_size"
+            android:layout_height="@dimen/chat_friend_avata_size"
+            android:layout_marginStart="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/chat_friend_avata_size"
+            android:layout_height="@dimen/chat_friend_avata_size"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="21dp"
+            app:cardElevation="0dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false"
+            app:layout_constraintBottom_toBottomOf="@id/vm_guest_avata"
+            app:layout_constraintEnd_toEndOf="@id/vm_guest_avata"
+            app:layout_constraintStart_toStartOf="@id/vm_guest_avata"
+            app:layout_constraintTop_toTopOf="@id/vm_guest_avata">
+
+            <FrameLayout
+                android:id="@+id/vm_local_video_box"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/small_emoji_status_size"
+            android:layout_height="@dimen/small_emoji_status_size"
+            app:cardCornerRadius="10dp"
+            app:contentPadding="2dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardElevation="2dp"
+            android:visibility="gone"
+            android:id="@+id/vm_emoji_status_box"
+            app:cardUseCompatPadding="false"
+            app:cardBackgroundColor="@color/colorLight"
+            app:layout_constraintEnd_toEndOf="@id/vm_guest_avata"
+            app:layout_constraintBottom_toBottomOf="@id/vm_guest_avata">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vm_emoji_status_img"
+                android:layout_gravity="center"
+                android:contentDescription="@string/emoji_status"
+                tools:src="@drawable/status_emoji_thinking_face_100px"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/vm_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Kevine James"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/vm_guest_avata"
+            app:layout_constraintEnd_toStartOf="@id/btns_cont"
+            app:layout_constraintStart_toEndOf="@id/vm_guest_avata"
+            app:layout_constraintTop_toTopOf="@+id/vm_guest_avata"
+            tools:text="@tools:sample/full_names" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btns_cont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/vm_guest_avata"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vm_guest_avata">
+
+            <ImageView
+                android:id="@+id/btn_vid_mute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/menu_button_background"
+                android:onClick="onLocalVideoMuteClicked"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/pause_20px"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_mute"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_mute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/menu_button_background"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/microphone_20px"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_switch_cam"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_switch_cam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/menu_button_background"
+                android:onClick="onSwitchCameraClicked"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/switch_camera_20px"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/c_start_vid_cam"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ui.BeinSwitch
+                android:id="@+id/c_start_vid_cam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:isw_active_tint_icon_left="@color/colorAccent"
+                app:isw_active_tint_icon_right="@color/colorAccent"
+                app:isw_background_color="@color/colorPrimaryDark"
+                app:isw_default_selection="left"
+                app:isw_icon_left="@drawable/chat_20px"
+                app:isw_icon_right="@drawable/video_message_20px"
+                app:isw_inactive_tint_icon_left="@color/colorPrimary"
+                app:isw_inactive_tint_icon_right="@color/colorPrimary"
+                app:isw_thumb_color_left="@color/colorPrimary"
+                app:isw_thumb_color_right="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_end"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/menu_button_background"
+                android:onClick="CallClickInit"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/delete_20px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerChat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/typing_cont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/c_live_box" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/vid_cat_box"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/typing_cont"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintEnd_toStartOf="@id/guideline2">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerChatVideo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/c_live_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimaryDark"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vm_top_box">
+
+        <TextView
+            android:id="@+id/live_not_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="middle"
+            android:maxLines="2"
+            android:text="@string/live_chat_request"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/live_accept_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        <Button-->
+<!--            android:id="@+id/live_accept_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:background="@drawable/default_button_background_solid"-->
+<!--            android:fontFamily="@font/josefin_sans_semi_bold"-->
+<!--            android:text="@string/accept"-->
+<!--            android:visibility="gone"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="8dp"
+            android:paddingStart="0dp"
+            android:id="@+id/live_accept_btn"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/vid_request_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <xyz.schwaab.avvylib.AvatarView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:id="@+id/vm_vid_req_avata"
+                android:src="@drawable/user_100px"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:id="@+id/vm_video_btn"
+                android:src="@drawable/video_call_32px"
+                app:layout_constraintStart_toEndOf="@id/vm_vid_req_avata"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/typing_cont"
+        layout="@layout/r_item_friend_typing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vm_bottom"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/vm_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vm_bottom"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/vm_edit_cont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/emoji_kiss_32px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/emoji_kiss_32px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/emoji_kiss_32px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/emoji_kiss_32px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/emoji_kiss_32px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/emoji_kiss_32px"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </HorizontalScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/vm_edit_cont"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vm_edit_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/vc_send_btn"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/vc_send_btn"
+            android:background="@drawable/chat_edit"
+            app:layout_constraintBottom_toBottomOf="@id/vc_send_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/vc_send_btn">
+
+            <ImageView
+                android:id="@+id/vc_keyboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minHeight="@dimen/button_height"
+                android:onClick="CallClickInit"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/happy_26px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.vanniktech.emoji.EmojiEditText
+                android:id="@+id/vc_edit_msg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="@string/type_message"
+                android:imeOptions="actionSend"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="@integer/max_text_characters"
+                android:maxLines="6"
+                android:minHeight="@dimen/button_height"
+                android:padding="4dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:focusedByDefault="true"
+                android:paddingStart="4dp"
+                android:paddingEnd="8dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/vc_keyboard"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                tools:targetApi="o" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/vc_send_btn"
+            android:layout_width="@dimen/button_height"
+            android:layout_height="@dimen/button_height"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/circle_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/paper_plane_24px" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

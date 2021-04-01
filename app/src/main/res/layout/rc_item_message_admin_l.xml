@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/fb_parent"
+    android:layout_gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
+    android:paddingBottom="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/large_avata_size"
+        android:layout_height="@dimen/large_avata_size"
+        android:id="@+id/fb_avata"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="2dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/user_100px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@tools:sample/avatars"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/large_emoji_status_size"
+        android:layout_height="@dimen/large_emoji_status_size"
+        app:cardCornerRadius="24dp"
+        app:contentPadding="8dp"
+        android:id="@+id/fb_emoji_status_img_box"
+        app:cardPreventCornerOverlap="true"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="false"
+        app:cardBackgroundColor="@color/colorLight"
+        app:layout_constraintEnd_toEndOf="@id/fb_avata"
+        app:layout_constraintBottom_toBottomOf="@id/fb_avata">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fb_emoji_status_img"
+            android:layout_gravity="center"
+            android:contentDescription="@string/emoji_status"
+            android:src="@drawable/status_emoji_thinking_face_100px"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fb_name"
+        android:textSize="17sp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorDark"
+        tools:text="@tools:sample/full_names"
+        app:layout_constraintTop_toBottomOf="@id/fb_avata"
+        app:layout_constraintStart_toStartOf="@id/fb_avata"
+        app:layout_constraintEnd_toEndOf="@id/fb_avata"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fb_phone"
+        android:textSize="14sp"
+        android:textColor="@color/colorAccent"
+        tools:text="@tools:sample/us_phones"
+        app:layout_constraintTop_toBottomOf="@id/fb_name"
+        app:layout_constraintStart_toStartOf="@id/fb_avata"
+        app:layout_constraintEnd_toEndOf="@id/fb_avata"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

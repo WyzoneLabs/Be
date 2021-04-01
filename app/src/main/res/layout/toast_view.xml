@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:id="@+id/toast_container"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="false"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardElevation="0.5dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:id="@+id/toast_sep"
+            android:layout_marginEnd="4dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/toast_icon"
+            android:layout_margin="4dp"
+            android:paddingVertical="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/toast_notice_64px"
+            app:layout_constraintStart_toEndOf="@id/toast_sep"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toast_text"
+            tools:text="The user is offline please try again later."
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/toast_icon"
+            app:layout_constraintTop_toTopOf="@id/toast_icon"
+            app:layout_constraintBottom_toBottomOf="@id/toast_icon"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.cardview.widget.CardView>

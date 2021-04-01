@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/friends_box"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:paddingStart="8dp"
+    android:paddingBottom="8dp"
+    tools:ignore="RtlSymmetry">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        android:id="@+id/rc_start_padding"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="@id/friend_name"
+        card_view:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/rc_sep"
+        android:layout_width="0dp"
+        android:layout_height="0.1dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorLight"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="@id/friend_name"
+        card_view:layout_constraintTop_toBottomOf="@id/rc_start_padding"/>
+
+    <FrameLayout
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/rc_group_txt_box"
+        android:layout_marginStart="8dp"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="@id/friend_initial"
+        card_view:layout_constraintBottom_toBottomOf="@id/friend_initial">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rc_group_txt"
+            android:text="T"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            android:textAllCaps="true"
+            android:textStyle="bold"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/friend_initial"
+        style="@style/Theme.Be.DefaultAvata"
+        android:layout_width="@dimen/small_avata_size"
+        android:layout_height="@dimen/small_avata_size"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="T"
+        android:visibility="invisible"
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintStart_toEndOf="@id/rc_group_txt_box"
+        card_view:layout_constraintTop_toBottomOf="@id/rc_sep" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/friend_avata"
+        android:layout_width="@dimen/small_avata_size"
+        android:layout_height="@dimen/small_avata_size"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
+        card_view:civ_border_color="@color/colorAccent"
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintStart_toEndOf="@id/rc_group_txt_box"
+        card_view:layout_constraintTop_toBottomOf="@id/rc_sep"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/small_emoji_status_size"
+        android:layout_height="@dimen/small_emoji_status_size"
+        app:cardCornerRadius="10dp"
+        app:contentPadding="2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardElevation="2dp"
+        android:id="@+id/fv_emoji_status_img_box"
+        app:cardUseCompatPadding="false"
+        app:cardBackgroundColor="@color/colorLight"
+        app:layout_constraintEnd_toEndOf="@id/friend_initial"
+        app:layout_constraintBottom_toBottomOf="@id/friend_initial">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fv_emoji_status_img"
+            android:layout_gravity="center"
+            android:contentDescription="@string/emoji_status"
+            android:src="@drawable/status_emoji_violin_100px"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/friend_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        card_view:layout_constraintEnd_toStartOf="@id/more_details"
+        card_view:layout_constraintStart_toEndOf="@id/friend_initial"
+        card_view:layout_constraintTop_toTopOf="@+id/friend_initial" />
+
+    <TextView
+        android:id="@+id/friend_online_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/colorDark"
+        android:textSize="12sp"
+        card_view:layout_constraintBottom_toBottomOf="@+id/friend_initial"
+        card_view:layout_constraintEnd_toStartOf="@id/more_details"
+        card_view:layout_constraintStart_toStartOf="@+id/friend_name"
+        card_view:layout_constraintTop_toBottomOf="@+id/friend_name" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/more_100px"
+        android:id="@+id/more_details"
+        android:padding="4dp"
+        android:layout_marginEnd="8dp"
+        android:adjustViewBounds="true"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintBottom_toBottomOf="@id/friend_initial"
+        card_view:layout_constraintTop_toTopOf="@id/friend_initial"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

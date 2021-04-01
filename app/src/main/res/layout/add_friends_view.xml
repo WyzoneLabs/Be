@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_marginStart="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <xyz.schwaab.avvylib.AvatarView
+        android:layout_width="@dimen/medium_user_avata"
+        android:layout_height="@dimen/medium_user_avata"
+        android:id="@+id/af_avata"
+        android:background="@drawable/gradient_background"
+        app:avvy_distance_to_border="0dp"
+        app:avvy_border_thickness="0dp"
+        app:avvy_border_highlight_color_end="@android:color/transparent"
+        app:avvy_border_color_end="@android:color/transparent"
+        app:avvy_border_color="@android:color/transparent"
+        app:avvy_border_highlight_color="@android:color/transparent"
+        app:avvy_circle_background_color="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/add_user_100px"
+        app:layout_constraintStart_toStartOf="@id/af_avata"
+        app:layout_constraintEnd_toEndOf="@id/af_avata"
+        app:layout_constraintTop_toTopOf="@id/af_avata"
+        app:layout_constraintBottom_toBottomOf="@id/af_avata"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_friend"
+        android:gravity="center"
+        android:singleLine="true"
+        android:id="@+id/af_user_name"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/af_avata"
+        app:layout_constraintEnd_toEndOf="@id/af_avata"
+        app:layout_constraintTop_toBottomOf="@id/af_avata"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".CreateProfileActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ac_main_box"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ac_profile_first_page_cont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/ac_profile_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/personalize_account"
+                android:textColor="@android:color/black"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ac_profile_title_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/personalize_account_info"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_title" />
+
+            <TextView
+                android:id="@+id/ac_profile_location"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_marginTop="16dp"
+                android:hint="@string/select_location"
+                android:inputType="none"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:textAlignment="gravity"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/colorPrimaryDark"
+                app:backgroundTint="@color/colorGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_title_info" />
+
+            <TextView
+                android:id="@+id/ac_profile_edit_name"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/username"
+                android:inputType="textPersonName"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="4dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@android:color/black"
+                android:visibility="gone"
+
+                app:backgroundTint="@color/colorGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_location" />
+
+            <TextView
+                android:id="@+id/ac_profile_gender"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/select_gender"
+                android:inputType="none"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="4dp"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:textAlignment="gravity"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/colorPrimaryDark"
+                app:backgroundTint="@color/colorGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_ttl_gender" />
+
+            <TextView
+                android:id="@+id/ac_profile_ageset"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/select_ageset"
+                android:inputType="none"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="4dp"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:textAlignment="gravity"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/colorPrimaryDark"
+                app:backgroundTint="@color/colorGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_ttl_age" />
+
+            <TextView
+                android:id="@+id/ac_profile_ttl_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/age_set"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_gender" />
+
+            <TextView
+                android:id="@+id/ac_profile_ttl_loc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/location"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_ageset" />
+
+            <TextView
+                android:id="@+id/ac_profile_ttl_gender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/gender"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_edit_name" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ac_profile_second_page_cont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <Button
+                android:id="@+id/ac_profile_pt_btn"
+                style="@style/Theme.Be.Button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/choose_avata"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_pt_title_info" />
+
+            <TextView
+                android:id="@+id/ac_profile_pt_title_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/add_profile_photo"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ac_profile_pt_title" />
+
+            <TextView
+                android:id="@+id/ac_profile_pt_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_your_avata"
+                android:textColor="@android:color/black"
+                android:textSize="32sp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.04" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ac_c_profile_welcome_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline8" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/ac_profile_skip_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/skip"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/ac_profile_next_btn"
+        style="@style/Theme.Be.ButtonSolid"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/default_button_height"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/next"
+        app:layout_constraintEnd_toEndOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@id/ac_main_box" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

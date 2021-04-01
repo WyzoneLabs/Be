@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ntf_pr"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    app:cardPreventCornerOverlap="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <xyz.schwaab.avvylib.AvatarView
+            android:id="@+id/ntf_avata"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/user_100px"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ntf_accept"
+            android:visibility="gone"
+            android:src="@drawable/chat_message_sent_24px"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/ntf_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="@tools:sample/full_names"
+            app:layout_constraintStart_toEndOf="@id/ntf_avata"
+            app:layout_constraintTop_toTopOf="@id/ntf_avata"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ntf_dot"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/dot_separate"
+            app:layout_constraintStart_toEndOf="@id/ntf_name"
+            app:layout_constraintBottom_toBottomOf="@id/ntf_name"
+            app:layout_constraintTop_toTopOf="@id/ntf_name"/>
+
+        <TextView
+            android:id="@+id/ntf_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Just Now"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/ntf_dot"
+            app:layout_constraintBaseline_toBaselineOf="@id/ntf_name"/>
+
+        <TextView
+            android:id="@+id/ntf_body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:text="@string/chat_notifications_info"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ntf_name"
+            app:layout_constraintTop_toBottomOf="@id/ntf_time" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

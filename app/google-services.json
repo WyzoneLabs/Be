@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "45990327562",
+    "firebase_url": "https://dialogs-96628.firebaseio.com",
+    "project_id": "dialogs-96628",
+    "storage_bucket": "dialogs-96628.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45990327562:android:1a6aff80e884ad40bbf6f3",
+        "android_client_info": {
+          "package_name": "com.brimbay.be"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45990327562-2b3o5stfpavqls8sk5i4ugiakd2srn38.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brimbay.be",
+            "certificate_hash": "006d25836c6f9a9833164fbf32ce59a33787f266"
+          }
+        },
+        {
+          "client_id": "45990327562-2mev23bsjlfpnck51sso79nihu2jjtom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brimbay.be",
+            "certificate_hash": "61a9437a967c72b1df11609d0108023eca8bd7aa"
+          }
+        },
+        {
+          "client_id": "45990327562-rgnt34h54qct75q9ia49ci3dhd8agr1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUivVB-Hgpq-Ei_ndzXM1TdSfvKp-UAO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45990327562-rgnt34h54qct75q9ia49ci3dhd8agr1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

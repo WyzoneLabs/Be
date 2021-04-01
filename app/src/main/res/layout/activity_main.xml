@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Be.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            app:popupTheme="@style/Theme.Be.PopupOverlay" />
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/collapsing_toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@android:color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hm_search_box"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:src="@drawable/delete_100px"
+                    android:id="@+id/hf_search_back"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp"
+                    app:tint="@color/colorDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <include 
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/small_button_height"
+                    layout="@layout/search_box_solid" 
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintStart_toEndOf="@id/hf_search_back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hm_top_box"
+                android:layout_gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    app:cardCornerRadius="21dp"
+                    app:cardElevation="1dp"
+                    android:id="@+id/hf_avata_box"
+                    app:cardBackgroundColor="@android:color/white"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/hf_avata"
+                        android:src="@drawable/user_100px"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/small_emoji_status_size"
+                    android:layout_height="@dimen/small_emoji_status_size"
+                    app:cardCornerRadius="10dp"
+                    app:contentPadding="2dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardElevation="2dp"
+                    android:id="@+id/hf_emoji_status_box"
+                    app:cardUseCompatPadding="false"
+                    app:cardBackgroundColor="@color/colorLight"
+                    app:layout_constraintEnd_toEndOf="@id/hf_avata_box"
+                    app:layout_constraintBottom_toBottomOf="@id/hf_avata_box">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hf_emoji_status_img"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/emoji_status"
+                        android:src="@drawable/status_emoji_thinking_face_100px"/>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/raleway_medium"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/hf_avata_box"
+                    app:layout_constraintEnd_toStartOf="@id/hf_search"
+                    app:layout_constraintStart_toEndOf="@id/hf_avata_box"
+                    app:layout_constraintTop_toTopOf="@id/hf_avata_box" />
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:src="@drawable/search_100px"
+                    android:id="@+id/hf_search"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp"
+                    app:tint="@color/colorPrimaryDark"
+                    app:layout_constraintEnd_toStartOf="@id/hf_settings"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:src="@drawable/menu_vertical_100px"
+                    android:id="@+id/hf_settings"
+                    android:padding="8dp"
+                    app:tint="@color/colorPrimaryDark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_main" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fr_send_chat_request"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:fabSize="normal"
+        android:visibility="gone"
+        android:foregroundTint="@color/white"
+        android:src="@drawable/paper_plane_100px"
+        app:backgroundTint="@color/colorAccent"
+        app:tint="@color/white"
+        android:contentDescription="@string/send_chat_request" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
