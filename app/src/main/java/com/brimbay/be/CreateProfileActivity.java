@@ -4,11 +4,16 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.telephony.gsm.GsmCellLocation;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -17,23 +22,41 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.brimbay.be.application.Config;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import database.UserDB;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,6 +76,9 @@ import utils.ImageUtils;
 import utils.PermissionUtil;
 import utils.Tools;
 import utils.ViewsUtil;
+
+import static com.brimbay.be.SignUpActivity.PHONE_NUMBER;
+import static com.brimbay.be.application.Config.REGISTER_URL;
 
 public class CreateProfileActivity extends AppCompatActivity implements View.OnClickListener {
 	/**
@@ -94,7 +120,10 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
             SIMCountryISO,softwareVersion,
             voiceMailNumber,simOperator,age,location;
 
-    @Override
+
+
+
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         selfRef = this;
@@ -351,6 +380,8 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
 
 						UserDB.getInstance(selfRef).addUser(user);
 
+						signup(user);
+
 						Intent intent = new Intent(selfRef, UploadUserDataActivity.class);
 						intent.setAction(UploadUserDataActivity.ACTION_INTENT_DATA_USERNAME);
 						intent.putExtra(UploadUserDataActivity.INTENT_DATA_USER, user);
@@ -397,7 +428,177 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
         return spinner.getSelectedItemPosition() == 0;
     }
 
-    private void askPermission() {
+	private void signup(User user) {
+
+
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.ACCESS_COARSE_LOCATION,
+						Manifest.permission.READ_PHONE_STATE
+				).withListener(new MultiplePermissionsListener() {
+			@Override public void onPermissionsChecked(MultiplePermissionsReport report) {  }
+			@Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) { }
+		}).check();
+
+
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+			return;
+		}
+
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+			askPermission();
+
+		}
+
+		ConnectivityManager cm =
+				(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		boolean isConnected = activeNetwork != null &&
+				activeNetwork.isConnectedOrConnecting();
+
+		boolean isWiFi = activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
+
+		//boolean isMobile = activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE;
+
+
+
+		if(isWiFi)
+			connectivity = "WI-FI";
+
+
+		SharedPreferences sharedPreferences = this
+				.getSharedPreferences(Config.SHARED_PREF_NAME,
+						Context.MODE_PRIVATE);
+
+		//Creating editor to store values to shared preferences
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+
+		//Adding values to editor
+		editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
+		editor.putString(Config.PHONE_SHARED_PREF, PHONE_NUMBER);
+
+		//Saving values to editor
+		editor.apply();
+
+		//Starting profile activity
+
+
+
+		IMEINumber = tm.getDeviceId();
+		subscriberID=tm.getDeviceId();
+		SIMSerialNumber=tm.getSimSerialNumber();
+		networkCountryISO=tm.getNetworkCountryIso();
+		SIMCountryISO=tm.getSimCountryIso();
+		softwareVersion=tm.getDeviceSoftwareVersion();
+		voiceMailNumber=tm.getVoiceMailNumber();
+		simOperator =  tm.getSimOperator();
+
+		int mcc = Integer.parseInt(simOperator .substring(0, 3));
+		int mnc = Integer.parseInt(simOperator.substring(3));
+
+		final String NetworkOperatorName =  tm.getNetworkOperatorName();
+
+
+		device_name = android.os.Build.MANUFACTURER +" "+ android.os.Build.MODEL;
+
+
+		GsmCellLocation locationG = (GsmCellLocation) tm.getCellLocation();
+
+		cid ="";
+		lac ="";
+
+		if (locationG != null)
+		{
+			cid =  String.valueOf(locationG.getCid());
+			lac = String.valueOf(locationG.getLac());
+
+		}
+
+
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+				new com.android.volley.Response.Listener<String>() {
+					@Override
+					public void onResponse(String response) {
+						Log.i("Tag", "onResponse: "+response);
+
+						if(response.equals("exists")){
+
+							Intent intent = new Intent(selfRef, UploadUserDataActivity.class);
+							intent.setAction(UploadUserDataActivity.ACTION_INTENT_DATA_USERNAME);
+							intent.putExtra(UploadUserDataActivity.INTENT_DATA_USER, user);
+							startActivity(intent);
+							finish();
+
+						}else if(response.equals("success")){
+							Intent intent = new Intent(selfRef, UploadUserDataActivity.class);
+							intent.setAction(UploadUserDataActivity.ACTION_INTENT_DATA_USERNAME);
+							intent.putExtra(UploadUserDataActivity.INTENT_DATA_USER, user);
+							startActivity(intent);
+							finish();
+						}else {
+							Log.i(TAG, "onResponse: "+response);
+						}
+
+					}
+				},
+				new com.android.volley.Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						//You can handle error here if you want
+						Toast.makeText(CreateProfileActivity.this,
+								error.toString(),
+								Toast.LENGTH_LONG).show();
+					}
+				}) {
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				Map<String, String> params = new HashMap<>();
+				//Adding parameters to request
+
+				params.put("user_name", PHONE_NUMBER);
+				params.put("user_phone", PHONE_NUMBER);
+				params.put("user_age_set", "_age");
+				params.put("user_location","_loc");
+				params.put("user_gender","_gender");
+				// params.put("user_password", password.getText().toString());
+				params.put("user_imei", IMEINumber);
+				params.put("user_sim_id", SIMSerialNumber);
+				params.put("user_sim_carrier", simOperator + " " + NetworkOperatorName);
+				params.put("user_device_name", device_name);
+				params.put("user_cell_id", cid);
+				params.put("user_lac", lac);
+				params.put("user_mnc", String.valueOf(mnc));
+				params.put("user_mcc", String.valueOf(mcc));
+				params.put("user_connection_type", connectivity);
+
+
+
+
+				//returning parameter
+				return params;
+			}
+		};
+
+		//Adding the string request to the queue
+		RequestQueue requestQueue = Volley.newRequestQueue(this);
+		stringRequest.setRetryPolicy(
+				new DefaultRetryPolicy(
+						500000,
+						DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+						DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+				)
+		);
+		requestQueue.add(stringRequest);
+
+
+	}
+
+
+	private void askPermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST);
     }
@@ -448,4 +649,40 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
 			}
 		}
     }
+
+
+	private boolean isValidEmail (String email) {
+		String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+		Matcher matcher = pattern.matcher(email);
+		return matcher.matches();
+	}
+
+
+	// validating password with retype password
+	private boolean isValidUserName(String username) {
+		if (username != null && username.length() > 4) {
+			return true;
+		}
+		return false;
+	}
+
+
+	// validating password with retype password
+	private boolean isValidPassword(String pass) {
+		if (pass != null && pass.length() > 6) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isValidPhone(String pass) {
+		if (pass != null && pass.length() == 10) {
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -7,13 +7,17 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.service.notification.StatusBarNotification;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -33,13 +37,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.brimbay.be.application.AppController;
+import com.brimbay.be.application.Config;
+import com.brimbay.be.classes.DownloadTask;
 import com.brimbay.be.databinding.ActivityMainBinding;
 import com.brimbay.be.databinding.FragmentFirstBinding;
+import com.brimbay.be.services.FileService;
+import com.brimbay.be.sqlite.DbHelper;
 import com.google.android.exoplayer2.C;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
@@ -50,14 +68,27 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.squareup.picasso.Picasso;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
 import com.tomash.androidcontacts.contactgetter.entity.PhoneNumber;
 import com.tomash.androidcontacts.contactgetter.main.contactsGetter.ContactsGetterBuilder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import adapter.ChatsAdapter;
@@ -83,6 +114,9 @@ import utils.Tools;
 import utils.ViewsUtil;
 
 import static androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC;
+import static com.brimbay.be.application.Config.BASE_URL;
+import static com.brimbay.be.application.Config.DOWNLOAD_URL;
+import static com.brimbay.be.application.Config.S_URL;
 import static services.ServiceUtils.isNetworkConnected;
 import static utils.Configs.STR_DEFAULT_BASE64;
 import static utils.Configs.TIME_TO_OFFLINE;
@@ -130,19 +164,96 @@ public class MainActivity extends AppCompatActivity implements ChatsAdapter.OnCh
 
     private ActivityMainBinding binding;
 
+
+    /*Download Advert Images*/
+    DownloadTask downloadTask;
+    String NOMEDIA = ".nomedia";
+    Context mContext = this;
+
+    String PHONE_NUMBER = "";
+
+    DbHelper DB;
+
+
+    /**
+     * permissions request code
+     */
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+
+    /**
+     * Permissions that need to be explicitly requested from end user.
+     */
+    private static final String[] REQUIRED_SDK_PERMISSIONS = new String[] {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CALL_PHONE};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         selfRef = this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         preferenceHelper =  PreferenceHelper.getInstance(selfRef);
+
+        checkPermissions();
+
+        Dexter.withContext(this)
+                .withPermissions(
+                        Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ).withListener(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+
+            }
+
+        }).check();
+
+
         if (savedInstanceState != null && savedInstanceState.get(EMOJI_KEY) != null){
             mEmojiPath = savedInstanceState.getString(EMOJI_KEY);
         }
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+        PHONE_NUMBER = sharedPreferences.getString(Config.PHONE_SHARED_PREF,"");//We will start the Profile Activity
+
+
+
+
+        /*Download Images*/
+
+        DB = new DbHelper(mContext);
+
+
+        /*Another Custom Test*/
+
+        Cursor c =  DB.getData();
+
+        Log.i(TAG, "onCreate: "+ c.getCount());
+
+        syncData();
+        getDownloads();
+
         initUI();
+
+
+        startService(new Intent(selfRef, FileService.class));
+
+
         mAuth = FirebaseAuth.getInstance();
         bottomMaterialDialog = new BottomMaterialDialog.Builder(selfRef);
         friendsAdapter = new FriendsAdapter(selfRef);
@@ -970,5 +1081,400 @@ public class MainActivity extends AppCompatActivity implements ChatsAdapter.OnCh
         bottomSheetDialog.setOnBottomDialogInteraction(this::setUpChatRequests);
         bottomSheetDialog.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
     }
+
+
+    private void checkIfPermissionSet() {
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.CALL_PHONE
+
+                )
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            // do you work now
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            /*final Intent i = new Intent();
+                            i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            i.addCategory(Intent.CATEGORY_DEFAULT);
+                            i.setData(Uri.parse("package:" + selfRef.getPackageName()));
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                            selfRef.startActivity(i);*/
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    private void syncData() {
+        Cursor c =  DB.getData();
+        Log.i(TAG, "onCreate: "+ c.getCount());
+
+        if(c != null){
+
+            c.moveToFirst();
+            while (!c.isAfterLast()) {
+                int advert_id = c.getInt(0);
+                int advert_clicks = c.getInt(6);
+                int advert_views = c.getInt(7);
+
+
+                Log.i(TAG, "syncData: "+advert_id);
+
+                if((advert_clicks != 0) || (advert_views != 0)){
+
+                    Toast.makeText(selfRef, " VIEWS = "+ advert_views, Toast.LENGTH_SHORT).show();
+
+                    syncValues(advert_id,advert_clicks,advert_views);
+                }
+
+                c.moveToNext();
+            }
+
+
+        }
+
+
+
+
+    }
+
+    private void syncValues(int advert_id, int advert_clicks, int advert_views) {
+
+
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                S_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.i(TAG, "onResponse: " + response + " Response");
+
+                        if(response.startsWith("u_")){
+
+                            String string = response;
+                            String[] parts = string.split("_");
+                            String id = parts[1];
+
+                            DB = new DbHelper(mContext);
+
+                            DB.updateViewandClicks(id);
+
+                            Toast.makeText(selfRef, id, Toast.LENGTH_SHORT).show();
+
+
+                        }else if(response.startsWith("d_")){
+
+                            /* Delete Advert and File */
+
+                            String string = response;
+                            String[] parts = string.split("_");
+                            String id = parts[1];
+
+
+                            DB = new DbHelper(mContext);
+
+
+
+
+                            Cursor cursor =  DB.getSingleAdvert(id);
+
+                            Log.i(TAG, "onResponse: "+cursor.getCount() + " hello Delete");
+
+                            Toast.makeText(selfRef, id, Toast.LENGTH_SHORT).show();
+
+                            if(cursor.getCount()>0){
+
+
+                                if(cursor != null)
+                                {
+
+                                    cursor.moveToFirst();
+
+                                    if(!cursor.isAfterLast()) {
+
+                                        String ImagePath = cursor.getString(3);
+
+                                        Boolean deleted = deleteImage(ImagePath);
+
+                                        if (deleted) {
+
+                                            DB.removeAdvert(id);
+
+                                        } else {
+                                            Log.i(TAG, "onResponse: File not deleted");
+                                        }
+
+                                    }
+
+
+
+                                }else{
+
+                                    Log.i(TAG, "onResponse: Data not found");
+
+                                }
+
+
+                            }
+
+
+                        }else{
+
+
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //You can handle error here if you want
+                        //Toast.makeText(OrdersActivity.this,
+                        //error.toString(),
+                        // Toast.LENGTH_LONG).show();
+                        //waitingDialog.dismiss();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                //Adding parameters to request
+
+                Log.i(TAG, "getParams: "+advert_id);
+                params.put("a",String.valueOf(advert_id));
+                params.put("v",String.valueOf(advert_views));
+                params.put("c",String.valueOf(advert_clicks));
+                params.put("p",PHONE_NUMBER);
+
+
+                //returning parameter
+                return params;
+            }
+
+        };
+
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    private boolean deleteImage(String imagePath) {
+
+
+
+        File fdelete =  new File(Environment.getExternalStorageDirectory() + "/wyzone/"+ imagePath);
+
+        if (fdelete.exists()) {
+
+            if (fdelete.delete()) {
+
+                return  true;
+
+            } else {
+
+                return false;
+            }
+        }
+
+        return  false;
+    }
+
+    public  void getDownloads(){
+
+        createDir();
+
+        StringRequest billionaireReq = new StringRequest(DOWNLOAD_URL,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.i("Application Data", response);
+
+                        try {
+
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray data = jsonObject.getJSONArray("result");
+
+                            Log.i(TAG, "onResponse: "+data.length());
+
+
+                            for (int j = 0; j < data.length(); j++) {
+
+                                //do a for loop to download multiple images
+
+                                JSONObject obj = data.getJSONObject(j);
+
+                                String advert_image_path =  BASE_URL + obj.getString("advert_image_path");
+
+                                Log.e(TAG, "onResponse: " + advert_image_path);
+
+
+                                String string = obj.getString("advert_image_path");
+                                String[] parts = string.split("/");
+
+
+                                boolean stored = DB.addAdvert(obj.getString("advert_id"),
+                                        obj.getString("advert_name"),
+                                        obj.getString(""),
+                                        obj.getString(""),
+                                        parts[1],
+                                        obj.getString("company_name"));
+
+
+                                // Store new ads on Sqlite
+                                if(stored){
+
+                                    downloadTask = new DownloadTask(MainActivity.this);
+                                    downloadTask.execute(advert_image_path);
+
+
+                                }
+
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener()
+
+        {
+            @Override
+            public void onErrorResponse (VolleyError error){
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            }
+        })
+
+                /*what might make it not work*/
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                //Adding parameters to request
+                params.put("p", PHONE_NUMBER);
+
+
+                //returning parameter
+                return params;
+            }
+
+        }/*what might make it not work*/;
+
+        AppController.getInstance().addToRequestQueue(billionaireReq, "");
+    }
+
+
+    private void createDir() {
+
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            // do you work now
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // permission is denied permenantly, navigate user to app settings
+                            //finish();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                })
+                .onSameThread()
+                .check();
+
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory(), "wyzone");
+        createNomedia();
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+
+                Log.d("App", "failed to create directory");
+            }else{
+
+                createNomedia();
+            }
+        }else{
+            createNomedia();
+        }
+
+    }
+
+    private void createNomedia() {
+        Log.d("App", "failed to create directory");
+        File nomediaFile = new File(Environment.getExternalStorageDirectory() + "/wyzone/"+ NOMEDIA);
+        if(!nomediaFile.exists()){
+            try {
+                nomediaFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    /**
+     * Checks the dynamically-controlled permissions and requests missing permissions from end user.
+     */
+    protected void checkPermissions() {
+        final List<String> missingPermissions = new ArrayList<String>();
+        // check all required dynamic permissions
+        for (final String permission : REQUIRED_SDK_PERMISSIONS) {
+            final int result = ContextCompat.checkSelfPermission(this, permission);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(permission);
+            }
+        }
+        if (!missingPermissions.isEmpty()) {
+            // request all missing permissions
+            final String[] permissions = missingPermissions
+                    .toArray(new String[missingPermissions.size()]);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
+        } else {
+            final int[] grantResults = new int[REQUIRED_SDK_PERMISSIONS.length];
+            Arrays.fill(grantResults, PackageManager.PERMISSION_GRANTED);
+            onRequestPermissionsResult(REQUEST_CODE_ASK_PERMISSIONS, REQUIRED_SDK_PERMISSIONS, grantResults);
+        }
+    }
+
 
 }

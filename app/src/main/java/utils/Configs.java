@@ -5,6 +5,7 @@ import com.brimbay.be.R;
 public class Configs {
     public static final String DATABASE_NAME = "dialogs";
     public static final String BASE_URL = "https://wyzone.co.ke/app/";
+    public static final String FILE_URL = "https://wyzone.co.ke/cdn/";
 
     public static final String STR_DEFAULT_BASE64 = "default";
     public static final String STR_DEFAULT_ICON = "default_icon";
